@@ -1,0 +1,19 @@
+#!/bin/sh
+# A small wrapper for running ffs-query in standalone mode.
+#
+# Sets up PYTHONPATH and execs the actual main script.
+set -fu
+
+SCRIPT_FILE="$(readlink -f "${BASH_SOURCE:-${0}}")"
+[ -n "${SCRIPT_FILE}" ] || exit 70
+
+SCRIPT_DIR="${SCRIPT_FILE%/*}"
+[ -n "${SCRIPT_DIR}" ] || exit 70  # let's not allow / as SCRIPT_DIR
+
+PYM_DIR="${SCRIPT_DIR}/pym"
+[ -d "${PYM_DIR}/ffs" ] || exit 70
+
+PYTHONPATH="${PYM_DIR}${PYTHONPATH:+:${PYTHONPATH}}"
+export PYTHONPATH
+
+exec "${PYTHON3:-python3}" -m ffs.scripts.ffs_query "${@}"
