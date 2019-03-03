@@ -44,8 +44,6 @@ class FilterLangParser(ffs.fon.query.lang._base.parser.ParserBase):
             (
                 "nonassoc",
                 "NE", "GE", "LE", "GT", "LT", "EQ_CMP", "EQ"
-                # "NE", "GE", "LE", "GT", "LT", "EQ_CMP",
-                # "EQ", "COL_EQ", "PLUS_EQ", "BITOR_EQ"
             ),
             ("right", "NOT"),
             ("left", "AND"),
